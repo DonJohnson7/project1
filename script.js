@@ -43,13 +43,10 @@ flipButton.onclick = function() {
 
             let result = flipCoin();
             coinImage.src = result;
-            let resultText = (result === 'head.png') ? 'Heads' : 'Tails';
 
             if (choice === result) {
                 money += betAmount * 2;
-                winloseParagraph.textContent = 'YOU WIN! You won $' + betAmount * 2;
-            } else {
-                winloseParagraph.textContent = 'You lose! The coin landed on ' + resultText;
+                winloseParagraph.textContent = 'YOU WON! You won $' + betAmount * 2;
             }
 
             moneySpan.textContent = money;
