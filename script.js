@@ -12,58 +12,58 @@ let money = 100;
 
 // Coin flip function
 let flipCoin = function() {
-    let result = (Math.random() < 0.5) ? 'head.png' : 'tail.png';
-    return result;
-}
+  let result = Math.random() < 0.5 ? 'head.png' : 'tail.png';
+  return result;
+};
 
 flipButton.onclick = function() {
-    let betAmount = parseInt(betAmountInput.value);
-    let choice = choiceSelect.value;
+  let betAmount = parseInt(betAmountInput.value);
+  let choice = choiceSelect.value;
 
-    if (betAmount > money) {
-        alert('Not enough money!');
-        return;
-    }
-    
-    money -= betAmount;
+  if (betAmount > money) {
+    alert('Non-sufficient funds!');
+    return;
+  }
 
-    // Clear the countdown and win/lose message
-    countdownParagraph.textContent = '';
-    winloseParagraph.textContent = '';
-    wonAmountParagraph.textContent = '';
+  money -= betAmount;
 
-    // Start the countdown
-    let countdown = 3;
+  // Clear the countdown and win/lose message
+  countdownParagraph.textContent = '';
+  winloseParagraph.textContent = '';
+  wonAmountParagraph.textContent = '';
+
+  // Start the countdown
+  let countdown = 3;
+  countdownParagraph.textContent = countdown;
+
+  let countdownInterval = setInterval(function() {
+    countdown--;
     countdownParagraph.textContent = countdown;
 
-    let countdownInterval = setInterval(function() {
-        countdown--;
-        countdownParagraph.textContent = countdown;
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
 
-        if (countdown === 0) {
-            clearInterval(countdownInterval);
+      coinImage.classList.add('flipping'); // Apply the flipping animation
 
-            coinImage.style.animation = 'flip 1s ease-in-out';
+      let result = flipCoin();
 
-            let result = flipCoin();
+      setTimeout(function() {
+        coinImage.src = result;
 
-            setTimeout(function() {
-                coinImage.src = result;
-
-                if (choice === result) {
-                    money += betAmount * 2;
-                    winloseParagraph.textContent = 'YOU WIN!';
-                    wonAmountParagraph.textContent = '$' + betAmount * 2;
-                }
-
-                moneySpan.textContent = money;
-                coinImage.style.animation = '';
-            }, 1000);
+        if (choice === result) {
+          money += betAmount * 2;
+          winloseParagraph.textContent = 'YOU WIN!';
+          wonAmountParagraph.textContent = 'You won $' + betAmount * 2;
         }
-    }, 1000);
-}
+
+        moneySpan.textContent = money;
+        coinImage.classList.remove('flipping'); // Remove the flipping animation
+      }, 1000);
+    }
+  }, 1000);
+};
 
 // Adjust max bet amount dynamically
 setInterval(function() {
-    betAmountInput.max = money;
+  betAmountInput.max = money;
 }, 100);
