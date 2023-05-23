@@ -57,7 +57,7 @@ document.getElementById('flipButton').addEventListener('click', function() {
             betElement.max = money;
 
             // Display the game result
-            alert(gameResult);
+            document.getElementById('result').textContent = gameResult;
 
             // Remove the countdown element and enable the button again
             document.body.removeChild(countdownElement);
