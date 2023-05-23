@@ -1,3 +1,19 @@
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+#coin {
+    animation: flip 1s ease-in-out;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,7 +22,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #000033; /* dark blue */
+    background-color: #000033;
     color: #f9d44c;
 }
 
@@ -23,8 +39,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: 2px solid #f9d44c; /* border for game area */
-    border-radius: 15px;
     padding: 20px;
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(5px);
@@ -39,10 +53,10 @@ h1 {
 img {
     width: 150px;
     height: 150px;
-    box-shadow: 0px 0px 5px 3px rgba(249,212,76,0.5); /* Shadow for coin */
+    box-shadow: 0px 0px 5px 3px rgba(249,212,76,0.5);
 }
 
-#countdown, #winlose {
+#countdown, #winlose, #wonAmount {
     font-size: 1.5em;
     margin: 20px 0;
 }
