@@ -1,23 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Coin Flip Game</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <h1>Coin Flip Game</h1>
-    <img id="coin" src="head.png" alt="coin">
+document.getElementById('flipButton').addEventListener('click', function() {
+    // Randomly choose between head and tail
+    let result = Math.random() < 0.5 ? 'head.png' : 'tail.png';
 
-    <h2>Your money: $<span id="money">100</span></h2>
-    <label for="bet">Bet Amount: </label>
-    <input id="bet" type="number" min="1" max="100" value="10">
-    <label for="choice">Your choice: </label>
-    <select id="choice">
-        <option value="head.png">Heads</option>
-        <option value="tail.png">Tails</option>
-    </select>
-    <button id="flipButton">Flip the Coin!</button>
+    // Change the coin image
+    document.getElementById('coin').src = result;
 
-    <script src="script.js"></script>
-</body>
-</html>
+    // Get the user's bet and choice
+    let bet = parseInt(document.getElementById('bet').value);
+    let choice = document.getElementById('choice').value;
+
+    // Get the user's money
+    let moneyElement = document.getElementById('money');
+    let money = parseInt(moneyElement.textContent);
+
+    // Check if the user won or lost
+    if(result === choice) {
+        // User won
+        money += bet;
+        console.log('You won!');
+    } else {
+        // User lost
+        money -= bet;
+        console.log('You lost!');
+    }
+
+    // Update the user's money
+    moneyElement.textContent = money;
+});
