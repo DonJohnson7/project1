@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: radial-gradient(circle, #3a2b21, #201b11);
+    background-color: #000033; /* dark blue */
     color: #f9d44c;
 }
 
@@ -23,6 +23,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    border: 2px solid #f9d44c; /* border for game area */
     border-radius: 15px;
     padding: 20px;
     background: rgba(255,255,255,0.1);
@@ -38,10 +39,11 @@ h1 {
 img {
     width: 150px;
     height: 150px;
+    box-shadow: 0px 0px 5px 3px rgba(249,212,76,0.5); /* Shadow for coin */
 }
 
-#result {
-    font-size: 1.2em;
+#countdown, #winlose {
+    font-size: 1.5em;
     margin: 20px 0;
 }
 
