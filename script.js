@@ -6,6 +6,7 @@ let coinImage = document.getElementById('coin');
 let moneySpan = document.getElementById('money');
 let countdownParagraph = document.getElementById('countdown');
 let winloseParagraph = document.getElementById('winlose');
+let wonAmountParagraph = document.getElementById('wonAmount');
 
 let money = 100;
 
@@ -29,6 +30,7 @@ flipButton.onclick = function() {
     // Clear the countdown and win/lose message
     countdownParagraph.textContent = '';
     winloseParagraph.textContent = '';
+    wonAmountParagraph.textContent = '';
 
     // Start the countdown
     let countdown = 3;
@@ -41,15 +43,22 @@ flipButton.onclick = function() {
         if (countdown === 0) {
             clearInterval(countdownInterval);
 
+            coinImage.style.animation = 'flip 1s ease-in-out';
+
             let result = flipCoin();
-            coinImage.src = result;
 
-            if (choice === result) {
-                money += betAmount * 2;
-                winloseParagraph.textContent = 'YOU WON! You won $' + betAmount * 2;
-            }
+            setTimeout(function() {
+                coinImage.src = result;
 
-            moneySpan.textContent = money;
+                if (choice === result) {
+                    money += betAmount * 2;
+                    winloseParagraph.textContent = 'YOU WIN!';
+                    wonAmountParagraph.textContent = 'You won $' + betAmount * 2;
+                }
+
+                moneySpan.textContent = money;
+                coinImage.style.animation = '';
+            }, 1000);
         }
     }, 1000);
 }
