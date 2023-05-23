@@ -2,29 +2,31 @@
   0% {
     transform: rotateY(0deg);
   }
-  2% {
-    transform: rotateY(72deg);
-  }
-  20% {
-    transform: rotateY(180deg);
-  }
-  50% {
+  16.666% {
     transform: rotateY(360deg);
   }
-  80% {
-    transform: rotateY(540deg);
+  33.333% {
+    transform: rotateY(720deg);
+  }
+  50% {
+    transform: rotateY(1080deg);
+  }
+  66.666% {
+    transform: rotateY(1440deg);
+  }
+  83.333% {
+    transform: rotateY(1800deg);
   }
   100% {
-    transform: rotateY(720deg);
+    transform: rotateY(2160deg);
   }
 }
 
 .flip-animation {
   animation-name: flip;
   animation-duration: 6s; /* Set animation duration to 6 seconds */
-  animation-timing-function: ease-in-out;
+  animation-timing-function: linear; /* Optional timing function */
 }
-
 
 body {
   display: flex;
