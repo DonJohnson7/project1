@@ -10,6 +10,12 @@
   }
 }
 
+.flip-animation {
+  animation-name: flip;
+  animation-duration: 3s; /* Set animation duration to 3 seconds */
+  animation-timing-function: ease-in-out;
+}
+
 body {
   display: flex;
   justify-content: center;
