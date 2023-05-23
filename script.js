@@ -53,7 +53,7 @@ flipButton.onclick = function() {
                 if (choice === result) {
                     money += betAmount * 2;
                     winloseParagraph.textContent = 'YOU WIN!';
-                    wonAmountParagraph.textContent = 'You won $' + betAmount * 2;
+                    wonAmountParagraph.textContent = '$' + betAmount * 2;
                 }
 
                 moneySpan.textContent = money;
