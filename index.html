@@ -1,33 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Coin Flip Game</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <div id="balance">
-        <h2>Your money: $<span id="money">100</span></h2>
-    </div>
+// Get element references
+let betAmountInput = document.getElementById('bet');
+let choiceSelect = document.getElementById('choice');
+let flipButton = document.getElementById('flipButton');
+let coinImage = document.getElementById('coin');
+let moneySpan = document.getElementById('money');
+let countdownParagraph = document.getElementById('countdown');
+let winloseParagraph = document.getElementById('winlose');
+let wonAmountParagraph = document.getElementById('wonAmount'); // New
 
-    <div id="game">
-        <h1>Coin Flip Game</h1>
-        <img id="coin" src="head.png" alt="coin">
-        
-        <p id="countdown"></p>
-        <p id="winlose"></p>
-        <!-- New Paragraph for displaying won amount -->
-        <p id="wonAmount"></p> 
+let money = 100;
 
-        <label for="bet">Bet Amount: </label>
-        <input id="bet" type="number" min="1" max="100" value="10">
-        <label for="choice">Your choice: </label>
-        <select id="choice">
-            <option value="head.png">Heads</option>
-            <option value="tail.png">Tails</option>
-        </select>
-        <button id="flipButton">Flip the Coin!</button>
-    </div>
+// Coin flip function
+let flipCoin = function() {
+    let result = (Math.random() < 0.5) ? 'head.png' : 'tail.png';
+    return result;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+flipButton.onclick = function() {
+    let betAmount = parseInt(betAmountInput.value);
+    let choice = choiceSelect.value;
+
+    if (betAmount > money) {
+        alert('Not enough money!');
+        return;
+    }
+    
+    money -= betAmount;
+
+    // Clear the countdown and win/lose message
+    countdownParagraph.textContent = '';
+    winloseParagraph.textContent = '';
+    wonAmountParagraph.textContent = ''; // New
+
+    // Start the countdown
+    let countdown = 3;
+    countdownParagraph.textContent = countdown;
+
+    let countdownInterval = setInterval(function() {
+        countdown--;
+        countdownParagraph.textContent = countdown;
+
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
+
+            let result = flipCoin();
+            coinImage.src = result;
+
+            if (choice === result) {
+                money += betAmount * 2;
+                winloseParagraph.textContent = 'YOU WIN!';
+                wonAmountParagraph.textContent = 'You won $' + betAmount * 2; // New
+            }
+
+            moneySpan.textContent = money;
+        }
+    }, 1000);
+}
+
+// Adjust max bet amount dynamically
+setInterval(function() {
+    betAmountInput.max = money;
+}, 100);
