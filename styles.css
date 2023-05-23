@@ -1,18 +1,25 @@
 @keyframes flip {
-    0% {
-        transform: rotateY(0deg);
-    }
-    50% {
-        transform: rotateY(180deg);
-    }
-    100% {
-        transform: rotateY(0deg);
-    }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
 }
 
 #coin {
-    animation: flip 1s ease-in-out;
+  width: 150px;
+  height: 150px;
+  animation: none; /* Remove existing animation */
 }
+
+.flipping {
+  animation: flip 1s ease-in-out;
+}
+
 
 body {
     display: flex;
