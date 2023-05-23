@@ -1,70 +1,63 @@
-// Get the money and bet elements
-let moneyElement = document.getElementById('money');
-let betElement = document.getElementById('bet');
+// Get element references
+let betAmountInput = document.getElementById('bet');
+let choiceSelect = document.getElementById('choice');
+let flipButton = document.getElementById('flipButton');
+let coinImage = document.getElementById('coin');
+let moneySpan = document.getElementById('money');
+let countdownParagraph = document.getElementById('countdown');
+let winloseParagraph = document.getElementById('winlose');
 
-document.getElementById('flipButton').addEventListener('click', function() {
-    // Get the user's bet and choice
-    let bet = parseInt(betElement.value);
-    let choice = document.getElementById('choice').value;
+let money = 100;
 
-    // Get the user's money
-    let money = parseInt(moneyElement.textContent);
+// Coin flip function
+let flipCoin = function() {
+    let result = (Math.random() < 0.5) ? 'head.png' : 'tail.png';
+    return result;
+}
 
-    // Check if the bet is greater than the money available
-    if(bet > money) {
-        alert("You can't bet more than you have!");
+flipButton.onclick = function() {
+    let betAmount = parseInt(betAmountInput.value);
+    let choice = choiceSelect.value;
+
+    if (betAmount > money) {
+        alert('Not enough money!');
         return;
     }
+    
+    money -= betAmount;
 
-    // Disable the button during the countdown
-    let flipButton = document.getElementById('flipButton');
-    flipButton.disabled = true;
+    // Clear the countdown and win/lose message
+    countdownParagraph.textContent = '';
+    winloseParagraph.textContent = '';
 
-    // Countdown before flipping the coin
-    let countdownValue = 3;
-    let countdownElement = document.createElement('h2');
-    countdownElement.id = 'countdown';
-    document.body.appendChild(countdownElement);
+    // Start the countdown
+    let countdown = 3;
+    countdownParagraph.textContent = countdown;
 
-    let countdown = setInterval(function() {
-        countdownElement.innerText = `Flipping in ${countdownValue}...`;
-        countdownValue--;
+    let countdownInterval = setInterval(function() {
+        countdown--;
+        countdownParagraph.textContent = countdown;
 
-        if(countdownValue < 0) {
-            // Randomly choose between head and tail
-            let result = Math.random() < 0.5 ? 'head.png' : 'tail.png';
+        if (countdown === 0) {
+            clearInterval(countdownInterval);
 
-            // Change the coin image
-            document.getElementById('coin').src = result;
+            let result = flipCoin();
+            coinImage.src = result;
+            let resultText = (result === 'head.png') ? 'Heads' : 'Tails';
 
-            // Check if the user won or lost
-            let gameResult = '';
-            if(result === choice) {
-                // User won
-                money += bet;
-                gameResult = 'You won! It was ' + (result === 'head.png' ? 'Heads' : 'Tails') + '!';
+            if (choice === result) {
+                money += betAmount * 2;
+                winloseParagraph.textContent = 'YOU WIN! You won $' + betAmount * 2;
             } else {
-                // User lost
-                money -= bet;
-                gameResult = 'You lost! It was ' + (result === 'head.png' ? 'Heads' : 'Tails') + '!';
+                winloseParagraph.textContent = 'You lose! The coin landed on ' + resultText;
             }
 
-            // Ensure the money doesn't go below 0
-            money = Math.max(money, 0);
-
-            // Update the user's money and bet max value
-            moneyElement.textContent = money;
-            betElement.max = money;
-
-            // Display the game result
-            document.getElementById('result').textContent = gameResult;
-
-            // Remove the countdown element and enable the button again
-            document.body.removeChild(countdownElement);
-            flipButton.disabled = false;
-
-            // Clear the countdown
-            clearInterval(countdown);
+            moneySpan.textContent = money;
         }
     }, 1000);
-});
+}
+
+// Adjust max bet amount dynamically
+setInterval(function() {
+    betAmountInput.max = money;
+}, 100);
