@@ -1,10 +1,13 @@
+// Get the money and bet elements
+let moneyElement = document.getElementById('money');
+let betElement = document.getElementById('bet');
+
 document.getElementById('flipButton').addEventListener('click', function() {
     // Get the user's bet and choice
-    let bet = parseInt(document.getElementById('bet').value);
+    let bet = parseInt(betElement.value);
     let choice = document.getElementById('choice').value;
 
     // Get the user's money
-    let moneyElement = document.getElementById('money');
     let money = parseInt(moneyElement.textContent);
 
     // Check if the bet is greater than the money available
@@ -49,8 +52,9 @@ document.getElementById('flipButton').addEventListener('click', function() {
             // Ensure the money doesn't go below 0
             money = Math.max(money, 0);
 
-            // Update the user's money
+            // Update the user's money and bet max value
             moneyElement.textContent = money;
+            betElement.max = money;
 
             // Display the game result
             alert(gameResult);
