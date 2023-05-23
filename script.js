@@ -21,7 +21,7 @@ flipButton.onclick = function() {
   let choice = choiceSelect.value;
 
   if (betAmount > money) {
-    alert('Not enough money!');
+    alert('Non-sufficient funds!');
     return;
   }
 
@@ -43,7 +43,8 @@ flipButton.onclick = function() {
     if (countdown === 0) {
       clearInterval(countdownInterval);
 
-      coinImage.classList.add('flipping'); // Apply the flipping animation
+      // Apply the flipping animation
+      coinImage.style.animation = 'flip 1s ease-in-out';
 
       let result = flipCoin();
 
@@ -57,7 +58,7 @@ flipButton.onclick = function() {
         }
 
         moneySpan.textContent = money;
-        coinImage.classList.remove('flipping'); // Remove the flipping animation
+        coinImage.style.animation = ''; // Remove the flipping animation
       }, 1000);
     }
   }, 1000);
