@@ -6,6 +6,13 @@ body {
     width: 100vw;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    position: relative;
+}
+
+#balance {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 #game {
