@@ -31,7 +31,7 @@ flipButton.onclick = function() {
   wonAmountParagraph.textContent = '';
 
   // Apply the flipping animation
-  coinImage.classList.add('flipping');
+  coinImage.classList.add('flip-animation');
 
   let result = flipCoin();
 
@@ -45,7 +45,7 @@ flipButton.onclick = function() {
     }
 
     moneySpan.textContent = money;
-    coinImage.classList.remove('flipping'); // Remove the flipping animation
+    coinImage.classList.remove('flip-animation'); // Remove the flipping animation
   }, 3000); // Wait for 3 seconds before resolving the flip
 };
 
