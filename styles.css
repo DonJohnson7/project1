@@ -2,16 +2,32 @@
   0% {
     transform: rotateY(0deg);
   }
-  5% {
+  3% {
     transform: rotateY(60deg);
   }
-  30% {
+  15%{
     transform: rotateY(180deg);
   }
-  55% {
+  28% {
     transform: rotateY(300deg);
   }
+  40% {
+    transform: rotateY(420deg);
+  }
+  52% {
+    transform: rotateY(360deg);  0% {
+    transform: rotateY(0deg);
+  }
+  60% {
+    transform: rotateY(60deg);
+  }
+  70% {
+    transform: rotateY(180deg);
+  }
   80% {
+    transform: rotateY(300deg);
+  }
+  90% {
     transform: rotateY(420deg);
   }
   100% {
@@ -21,7 +37,7 @@
 
 .flip-animation {
   animation-name: flip;
-  animation-duration: 6s; /* Set animation duration to 6 seconds */
+  animation-duration: 7s/* Set animation duration to 6 seconds */
   animation-timing-function: ease-in-out;
 }
 
