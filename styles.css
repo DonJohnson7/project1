@@ -2,7 +2,7 @@
   0% {
     transform: rotateY(0deg);
   }
-  50% {
+  30% {
     transform: rotateY(180deg);
   }
   100% {
@@ -12,9 +12,10 @@
 
 .flip-animation {
   animation-name: flip;
-  animation-duration: 3s; /* Set animation duration to 3 seconds */
-  animation-timing-function: ease-in-out;
+  animation-duration: 4s; /* Set animation duration to 4 seconds */
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1); /* Optional easing function */
 }
+
 
 body {
   display: flex;
