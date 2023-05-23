@@ -4,7 +4,6 @@ let choiceSelect = document.getElementById('choice');
 let flipButton = document.getElementById('flipButton');
 let coinImage = document.getElementById('coin');
 let moneySpan = document.getElementById('money');
-let countdownParagraph = document.getElementById('countdown');
 let winloseParagraph = document.getElementById('winlose');
 let wonAmountParagraph = document.getElementById('wonAmount');
 
@@ -27,41 +26,27 @@ flipButton.onclick = function() {
 
   money -= betAmount;
 
-  // Clear the countdown and win/lose message
-  countdownParagraph.textContent = '';
+  // Clear the win/lose message
   winloseParagraph.textContent = '';
   wonAmountParagraph.textContent = '';
 
-  // Start the countdown
-  let countdown = 3;
-  countdownParagraph.textContent = countdown;
+  // Apply the flipping animation
+  coinImage.classList.add('flipping');
 
-  let countdownInterval = setInterval(function() {
-    countdown--;
-    countdownParagraph.textContent = countdown;
+  let result = flipCoin();
 
-    if (countdown === 0) {
-      clearInterval(countdownInterval);
+  setTimeout(function() {
+    coinImage.src = result;
 
-      // Apply the flipping animation
-      coinImage.style.animation = 'flip 1s ease-in-out';
-
-      let result = flipCoin();
-
-      setTimeout(function() {
-        coinImage.src = result;
-
-        if (choice === result) {
-          money += betAmount * 2;
-          winloseParagraph.textContent = 'YOU WIN!';
-          wonAmountParagraph.textContent = '$' + betAmount * 2;
-        }
-
-        moneySpan.textContent = money;
-        coinImage.style.animation = ''; // Remove the flipping animation
-      }, 1000);
+    if (choice === result) {
+      money += betAmount * 2;
+      winloseParagraph.textContent = 'YOU WIN!';
+      wonAmountParagraph.textContent = '$' + betAmount * 2;
     }
-  }, 1000);
+
+    moneySpan.textContent = money;
+    coinImage.classList.remove('flipping'); // Remove the flipping animation
+  }, 3000); // Wait for 3 seconds before resolving the flip
 };
 
 // Adjust max bet amount dynamically
